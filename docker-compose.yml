@@ -1,0 +1,42 @@
+version: '2'
+services:
+  lb:
+    image: dockercloud/haproxy:1.2
+    ports:
+      # HOST:CONTAINER
+      - '80:80'
+    links:
+      - web
+    volumes:
+      # HOST:CONTAINER
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      BALANCE: roundrobin
+      VIRTUAL_HOST: dockermeetup.dev
+
+  web:
+    restart: always
+    dns:
+      - 8.8.8.8
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_USER: root
+      DATABASE_PASS: password
+      DATABASE_HOST: db
+      DATABASE_NAME: dev-db
+      GIN_MODE: debug
+      HTTP_PORT: 8080
+    expose:
+      - "8080"
+    links:
+      - db
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: "dev-db"
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+      - "3306:3306"
