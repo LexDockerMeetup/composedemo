@@ -1,4 +1,4 @@
-# MayMeetup Demo
+# Compose Demo
 
 This is a demo of how to setup a simple website using docker and docker-compose using Docker for mac.
 Version 1.11.1-beta10 (build: 6662)
