@@ -12,6 +12,7 @@ RUN go get github.com/jinzhu/gorm
 RUN go get github.com/joho/godotenv
 RUN go get github.com/gin-gonic/gin
 RUN go get github.com/go-sql-driver/mysql
+RUN go get bitbucket.org/liamstask/goose/cmd/goose
 
 RUN go build -o main .
 CMD ["/go/src/web/main"]
