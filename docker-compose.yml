@@ -4,7 +4,7 @@ services:
     image: dockercloud/haproxy:1.2
     ports:
       # HOST:CONTAINER
-      - '80:80'
+      - '80:80'    
     links:
       - web
     volumes:
@@ -21,22 +21,37 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile
-    environment:
-      DATABASE_USER: root
-      DATABASE_PASS: password
-      DATABASE_HOST: db
-      DATABASE_NAME: dev-db
-      GIN_MODE: debug
-      HTTP_PORT: 8080
+    env_file: web/.env
+    # environment:
+    #   DATABASE_USER: root
+    #   DATABASE_PASS: password
+    #   DATABASE_HOST: db
+    #   DATABASE_NAME: dev-db
+    #   GIN_MODE: debug
+    #   HTTP_PORT: 8080
     expose:
       - "8080"
     links:
-      - db
+    # depends_on
+      - database:db
 
-  db:
+  database:
     image: mysql
     environment:
       MYSQL_DATABASE: "dev-db"
       MYSQL_ROOT_PASSWORD: "password"
     ports:
       - "3306:3306"
+
+# networks:
+#   app_net:
+#     driver: bridge
+#     driver_opts:
+#       com.docker.network.enable_ipv6: "true"
+#     ipam:
+#       driver: default
+#       config:
+#       - subnet: 172.16.238.0/24
+#         gateway: 172.16.238.1
+#       - subnet: 2001:3984:3989::/64
+#         gateway: 2001:3984:3989::1
