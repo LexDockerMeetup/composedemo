@@ -7,3 +7,16 @@ Version 1.11.1-beta10 (build: 6662)
 * `docker-compose up -d`
 * `docker-compose run --rm web goose up`
 * open http://dockermeetup.dev in a browser
+
+## hadolint Linter
+[https://github.com/lukasmartinelli/hadolint](https://github.com/lukasmartinelli/hadolint)
+
+Install
+```
+brew update
+brew install hadolint
+```
+Use
+```
+hadolint Dockerfile
+```
