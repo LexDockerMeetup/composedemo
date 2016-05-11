@@ -1,0 +1,14 @@
+version: '2'
+services:
+    web:
+        restart: always        
+        build:
+            context: ./web
+            dockerfile: Dockerfile
+        env_file: web/.env
+        expose:
+            - "8080"
+        volumes:
+            - /home/demo/go/src/web/logs
+        # links:
+        #     - database:db

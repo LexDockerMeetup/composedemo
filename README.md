@@ -8,6 +8,13 @@ Version 1.11.1-beta10 (build: 6662)
 * `docker-compose run --rm web goose up`
 * open http://dockermeetup.dev in a browser
 
+For prod 
+
+```
+docker-compose -f docker-compose.prod.yml up -d
+docker-compose -f docker-compose.prod.yml run --rm web goose -env production up
+```
+
 ## hadolint Linter
 [https://github.com/lukasmartinelli/hadolint](https://github.com/lukasmartinelli/hadolint)
 
