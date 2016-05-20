@@ -4,7 +4,7 @@ services:
     image: dockercloud/haproxy:1.2
     ports:
       # HOST:CONTAINER
-      - '80:80'    
+      - '80:80'
     links:
       - web
     volumes:
@@ -32,7 +32,26 @@ services:
     expose:
       - "8080"
     links:
-    # depends_on
+    # depends_on:
+      - database:db
+
+  api:
+    restart: always
+    dns:
+      - 8.8.8.8
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: db
+    command: puma -C config/puma.rb
+    volumes:
+      - ./api:/app
+    expose:
+      - "3000"
+    ports:
+      - '3000:3000'
+    links:
       - database:db
 
   database:
