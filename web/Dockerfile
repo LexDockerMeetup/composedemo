@@ -19,11 +19,7 @@ WORKDIR /home/demo/go/src/web
 
 EXPOSE 8080
 
-RUN go get github.com/jinzhu/gorm
-RUN go get github.com/joho/godotenv
-RUN go get github.com/gin-gonic/gin
-RUN go get github.com/go-sql-driver/mysql
-RUN go get bitbucket.org/liamstask/goose/cmd/goose
+RUN go get github.com/jinzhu/gorm && go get github.com/joho/godotenv && go get github.com/gin-gonic/gin && go get github.com/go-sql-driver/mysql && go get bitbucket.org/liamstask/goose/cmd/goose
 
 RUN go build -o main .
 CMD ["/home/demo/go/src/web/main"]
